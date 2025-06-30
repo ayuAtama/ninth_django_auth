@@ -42,3 +42,11 @@ class EnrollView(View):
         course.total_enrollment += 1
         course.save()
         return HttpResponseRedirect(reverse(viewname='onlinecourse:course_details', args=(course.id,)))
+
+def logout_request(request):
+    # Get the user object based on session id in request
+    print("Log out the user `{}`".format(request.user.username))
+    # Logout user in the request
+    logout(request)
+    # Redirect user back to course list view
+    return redirect('onlinecourse:popular_course_list')
